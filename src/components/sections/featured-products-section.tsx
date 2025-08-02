@@ -28,7 +28,7 @@ const products = [
     id: 1,
     name: 'Inspiron 15',
     brand: 'Dell',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxkZWxsJTIwfGVufDB8fHx8MTc1NDA5ODI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'dell laptop',
     specs: '15.6" FHD, Intel i7, 16GB RAM, 512GB SSD',
     price: 899.99,
