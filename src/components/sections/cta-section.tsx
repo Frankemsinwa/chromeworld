@@ -7,22 +7,37 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { aiDealFinder } from "@/ai/ai-deal-finder";
+import { useToast } from "@/hooks/use-toast";
 
 export function CtaSection() {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState("");
+  const { toast } = useToast();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setIsLoading(true);
     setResult("");
 
-    // AI flow logic would be triggered here.
-    // Simulating an API call for demonstration.
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    setResult("Based on your needs, we recommend the Dell XPS 15 with a special 15% discount, or the versatile Lenovo Yoga 7i for on-the-go productivity. Both are available with fast delivery.");
-    setIsLoading(false);
+    const formData = new FormData(event.currentTarget);
+    const useCase = formData.get("use-case") as string;
+    const budget = formData.get("budget") as string;
+    const brand = formData.get("brand") as string;
+
+    try {
+      const response = await aiDealFinder({ useCase, budget, brand });
+      setResult(response.recommendation);
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: "Error",
+        description: "There was an error finding a deal. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -39,7 +54,7 @@ export function CtaSection() {
             <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               <div className="sm:col-span-2">
                 <Label htmlFor="use-case">Primary Use Case</Label>
-                <Select name="use-case" defaultValue="work">
+                <Select name="use-case" defaultValue="work" required>
                   <SelectTrigger id="use-case">
                     <SelectValue placeholder="Select a use case" />
                   </SelectTrigger>
@@ -54,12 +69,12 @@ export function CtaSection() {
               
               <div>
                 <Label htmlFor="budget">Maximum Budget ($)</Label>
-                <Input id="budget" type="number" placeholder="e.g., 1200" />
+                <Input id="budget" name="budget" type="number" placeholder="e.g., 1200" />
               </div>
 
               <div>
-                <Label htmlFor="brand">Preferred Brand (Optional)</Label>
-                <Select name="brand">
+                <Label htmlFor="brand">Preferred Brand</Label>
+                <Select name="brand" defaultValue="any">
                   <SelectTrigger id="brand">
                     <SelectValue placeholder="Any Brand" />
                   </SelectTrigger>
