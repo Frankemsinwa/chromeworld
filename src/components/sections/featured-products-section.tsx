@@ -49,7 +49,7 @@ const products = [
     id: 3,
     name: 'Yoga 7i',
     brand: 'Lenovo',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsZW5vdm8lMjBsYXB0b3B8ZW58MHx8fHwxNzU0MDk4NDM5fDA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'lenovo laptop',
     specs: '16" 2.5K Touch, Intel i5, 16GB RAM, 1TB SSD',
     price: 949.99,
