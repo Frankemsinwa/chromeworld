@@ -39,7 +39,7 @@ const products = [
     id: 2,
     name: 'MacBook Air M3',
     brand: 'Apple',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://images.unsplash.com/photo-1710905018864-d585574d79f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtYWNib29rJTIwYWlyJTIwTTN8ZW58MHx8fHwxNzU0MDk4MDg1fDA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'apple macbook',
     specs: '13.6" Liquid Retina, 8GB RAM, 256GB SSD',
     price: 1099.00,
