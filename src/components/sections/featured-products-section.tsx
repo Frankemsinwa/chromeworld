@@ -1,3 +1,6 @@
+"use client";
+
+import * as React from 'react';
 import {
   Card,
   CardContent,
@@ -10,6 +13,15 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const products = [
   {
@@ -55,7 +67,11 @@ const products = [
   },
 ];
 
+type Product = typeof products[0];
+
 export function FeaturedProductsSection() {
+  const [selectedProduct, setSelectedProduct] = React.useState<Product | null>(null);
+
   return (
     <section id="featured-products" className="py-16 sm:py-24">
       <div className="container mx-auto px-4">
@@ -91,13 +107,53 @@ export function FeaturedProductsSection() {
                   <p className="text-2xl font-bold text-primary">${product.price.toFixed(2)}</p>
                   {product.oldPrice && <p className="text-sm text-muted-foreground line-through">${product.oldPrice.toFixed(2)}</p>}
                 </div>
-                <Button asChild>
-                  <Link href="#">View</Link>
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button onClick={() => setSelectedProduct(product)}>View</Button>
+                  </DialogTrigger>
+                </Dialog>
               </CardFooter>
             </Card>
           ))}
         </div>
+
+        {selectedProduct && (
+          <Dialog open={!!selectedProduct} onOpenChange={(isOpen) => !isOpen && setSelectedProduct(null)}>
+            <DialogContent className="sm:max-w-[625px]">
+              <DialogHeader>
+                <div className="relative mb-4">
+                  <Image
+                    src={selectedProduct.image}
+                    alt={selectedProduct.name}
+                    data-ai-hint={selected.dataAiHint}
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover aspect-video rounded-lg"
+                  />
+                  {selectedProduct.badge && <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground border-transparent">{selectedProduct.badge}</Badge>}
+                </div>
+                <DialogTitle className="text-2xl font-bold">{selectedProduct.name}</DialogTitle>
+                <DialogDescription className="text-md text-muted-foreground">
+                  {selectedProduct.brand}
+                </DialogDescription>
+              </DialogHeader>
+              <div className="py-4">
+                <h3 className="font-semibold text-lg mb-2">Full Specifications:</h3>
+                <p className="text-muted-foreground">{selectedProduct.specs}</p>
+              </div>
+               <div className="flex justify-between items-center">
+                  <div>
+                    <p className="text-3xl font-bold text-primary">${selectedProduct.price.toFixed(2)}</p>
+                    {selectedProduct.oldPrice && <p className="text-md text-muted-foreground line-through">${selectedProduct.oldPrice.toFixed(2)}</p>}
+                  </div>
+              </div>
+              <DialogFooter>
+                <Button type="button" variant="secondary" onClick={() => setSelectedProduct(null)}>Close</Button>
+                <Button type="button" className="bg-accent hover:bg-accent/90">Buy Now</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        )}
       </div>
     </section>
   );
