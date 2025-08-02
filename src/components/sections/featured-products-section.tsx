@@ -125,7 +125,7 @@ export function FeaturedProductsSection() {
                   <Image
                     src={selectedProduct.image}
                     alt={selectedProduct.name}
-                    data-ai-hint={selected.dataAiHint}
+                    data-ai-hint={selectedProduct.dataAiHint}
                     width={600}
                     height={400}
                     className="w-full h-auto object-cover aspect-video rounded-lg"
