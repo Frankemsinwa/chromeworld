@@ -58,7 +58,7 @@ const products = [
     id: 4,
     name: 'Pavilion Aero',
     brand: 'HP',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://images.unsplash.com/photo-1663354027456-ce6a7e07d212?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxocCUyMGxhcHRvcHxlbnwwfHx8fDE3NTQwOTgzNjJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'hp laptop',
     specs: '13.3" WQXGA, AMD Ryzen 5, 16GB RAM, 512GB SSD',
     price: 699.99,
