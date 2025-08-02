@@ -6,7 +6,7 @@ export function HeroSection() {
   return (
     <section className="relative w-full h-[70vh] min-h-[500px] max-h-[700px] flex items-center justify-center text-center text-white">
       <Image
-        src="https://placehold.co/1920x1080.png"
+        src="/hero.jpg"
         alt="Modern tech store display wall"
         data-ai-hint="modern computer store"
         fill
